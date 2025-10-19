@@ -5,7 +5,7 @@ Project A: Generative Creatures
 CCLaboratories Biodiversity Atlas 
 */
 
-llet x, y;
+let x, y;
 let vx, vy;
 let hunger;
 let color1, color2;
