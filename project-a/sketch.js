@@ -21,7 +21,8 @@ let fallSpeed;
 let clickCount, clickTime;
 
 function setup() {
-  createCanvas(800, 500);
+  let canvas = createCanvas(800, 500);
+  canvas.parent("p5-canvas-container")
   colorMode(HSB, 360, 100, 100);
   noStroke();
   startLumibub();
