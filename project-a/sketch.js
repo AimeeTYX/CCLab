@@ -152,7 +152,7 @@ function draw() {
     isAttached == false &&
     isResting == false &&
     hunger < 5 &&
-    frameCount > 3000
+    frameCount > 1800
   ) {
     isEvolved = true;
   }
