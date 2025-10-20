@@ -184,11 +184,7 @@ function drawLumibub(x, y, t) {
 }
 
 function mousePressed() {
-  clickCount++;
   clickTime = frameCount;
-  if (frameCount - clickTime < 30 && clickCount > 10 && hunger < 10) {
-    isAttached = true;
-  }
   let d = dist(mouseX, mouseY, x, y);
   if (mouseX <= 800 && mouseX >= 0 && mouseY >= 0 && mouseY <= 500) {
     if (isResting == false && isDead == false) {
@@ -199,10 +195,14 @@ function mousePressed() {
           hue: random(360),
         };
       } else {
+        clickCount++;
         vx *= -1;
         vy *= -1;
       }
     }
+  }
+  if (frameCount - clickTime < 30 && clickCount > 10 && hunger < 10) {
+    isAttached = true;
   }
 }
 
