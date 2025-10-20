@@ -186,23 +186,26 @@ function drawLumibub(x, y, t) {
 function mousePressed() {
   clickCount++;
   clickTime = frameCount;
-  if (frameCount - clickTime < 30 && clickCount > 20 && hunger < 10) {
+  if (frameCount - clickTime < 30 && clickCount > 10 && hunger < 10) {
     isAttached = true;
   }
   let d = dist(mouseX, mouseY, x, y);
-  if (isResting == false && isDead == false) {
-    if (d > 50) {
-      target = {
-        x: mouseX,
-        y: mouseY,
-        hue: random(360),
-      };
-    } else {
-      vx *= -1;
-      vy *= -1;
+  if (mouseX <= 800 && mouseX >= 0 && mouseY >= 0 && mouseY <= 500) {
+    if (isResting == false && isDead == false) {
+      if (d > 50) {
+        target = {
+          x: mouseX,
+          y: mouseY,
+          hue: random(360),
+        };
+      } else {
+        vx *= -1;
+        vy *= -1;
+      }
     }
   }
 }
+
 
 function drawHungerbar() {
   let barWidth = 400;
