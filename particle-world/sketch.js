@@ -4,6 +4,7 @@ let NUM_OF_PARTICLES = 10;
 let MAX_OF_PARTICLES = 500;
 let particles = [];
 let smokeParticles = [];
+let light = 100;
 
 function setup() {
   let canvas = createCanvas(800, 500);
@@ -13,7 +14,16 @@ function setup() {
 }
 
 function draw() {
-  background(200, 20, 100);
+  let shakeX = 0;
+  let shakeY = 0;
+  if (keyIsPressed && key == " ") {
+    shakeX = random(-3, 3);
+    shakeY = random(-3, 3);
+  }
+
+  push();
+  translate(shakeX, shakeY);
+  background(200, 20, light);
   drawVolcano();
 
   let volcanoX = width / 2;
@@ -41,6 +51,7 @@ function draw() {
     for (let i = 0; i < NUM_OF_PARTICLES; i++) {
       particles.push(new Particle(volcanoX + random(-40, 40), topY + random(-15, 15)));
     }
+    light -= 0.2;
   }
 
   for (let i = 0; i < particles.length; i++) {
@@ -58,6 +69,7 @@ function draw() {
   if (particles.length > MAX_OF_PARTICLES) {
     particles.splice(0, 1); // remove the first (oldest) particle
   }
+  pop();
 }
 
 function drawVolcano() {
