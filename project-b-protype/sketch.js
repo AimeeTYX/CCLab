@@ -1,5 +1,6 @@
 let octopus, oil, pipe, cap, eye;
-let jellyfish, hook, hooks, net, eye2;
+let jellyfish, hook, hooks, net;
+let anglerfish;
 
 function preload() {
   oil = loadImage("assets/oil drum.png");
@@ -9,29 +10,33 @@ function preload() {
   net = loadImage("assets/net.png");
   hooks = loadImage("assets/hooks.png");
   hook = loadImage("assets/hook.png");
-  eye2 = loadImage("assets/eye2.png");
 }
 function setup() {
   let canvas = createCanvas(800, 500);
   canvas.id("p5-canvas");
   canvas.parent("p5-canvas-container");
-  octopus = new Octopus(width / 2, 80);
-  //jellyfish = new Jellyfish(width / 2, 100);
+  octopus = new Octopus(250, 80, 0.5);
+  jellyfish = new Jellyfish(600, 100, 0.5);
+  anglerfish = new Anglerfish(width / 2, height / 2);
   noStroke();
+
 }
 
 function draw() {
   background(100);
   octopus.display();
   octopus.update();
-  // jellyfish.display();
-  // jellyfish.update();
+  jellyfish.display();
+  jellyfish.update();
+  anglerfish.display();
+  anglerfish.update();
 }
 
 class Octopus {
-  constructor(x, y) {
+  constructor(x, y, size) {
     this.x = x;
     this.y = y;
+    this.size = size;
     this.s = 0;
     this.colors = []
     for (let i = 0; i < 24; i++) {
@@ -46,6 +51,7 @@ class Octopus {
     push();
     translate(this.x, this.y);
     imageMode(CENTER);
+    scale(this.size);
 
     push();
     tint(this.colors[0], this.colors[1], this.colors[2]);
@@ -236,9 +242,10 @@ class Octopus {
 }
 
 class Jellyfish {
-  constructor(x, y) {
+  constructor(x, y, size) {
     this.x = x;
     this.y = y;
+    this.size = size;
     this.s = 0;
     this.colors = []
     for (let i = 0; i < 9; i++) {
@@ -253,13 +260,15 @@ class Jellyfish {
     push();
     translate(this.x, this.y);
     imageMode(CENTER);
+    scale(this.size);
+
     push();
     rotate(radians(-75));
     noTint();
     image(net, 0, 0, net.width / 4 + this.s * 2, net.height / 4);
     pop();
     noTint();
-    image(eye2, 0, -50, eye2.width / 4, eye2.height / 4 + this.s);
+    image(eye, 0, -50, eye.width / 3, eye.height / 3);
     tint(this.colors[0], this.colors[1], this.colors[2]);
     image(hooks, -10, 235, hooks.width * 1.2, hooks.height * 1.2 - this.s * 2);
 
@@ -299,6 +308,29 @@ class Jellyfish {
     translate(0, hook.height / 4);
     tint(this.colors[6], this.colors[7], this.colors[8]);
     image(hook, 0, 0, hook.width / 2.5, hook.height / 2);
+    pop();
+  }
+}
+
+class Anglerfish {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.s = 0;
+    // this.colors = []
+    // for (let i = 0; i < 9; i++) {
+    //   this.colors.push(random(50, 250));
+    // }
+  }
+  update() {
+    this.s = sin(frameCount / 80) * 15;
+  }
+
+  display() {
+    push();
+    translate(this.x, this.y);
+    imageMode(CENTER);
+
     pop();
   }
 }
